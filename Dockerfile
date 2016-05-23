@@ -28,7 +28,7 @@ RUN apt-get update \
     && apt-get install -y build-essential \
                           curl \
                           git \
-                          mercurial \ 
+                          mercurial \
     && cd ${TMP} \
     && curl -O https://storage.googleapis.com/golang/go1.6.linux-amd64.tar.gz \
     && tar -xvf go1.6.linux-amd64.tar.gz \
