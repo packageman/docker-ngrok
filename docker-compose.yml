@@ -1,23 +1,18 @@
-data:
-  build: .
-  entrypoint: /bin/true
-
-service:
-  image: debian:jessie
-  command: >
-    ./ngrokd
-    -domain=ngrok.foobar.site
-    -httpAddr=:2080
-    -httpsAddr=:2443
-    -tunnelAddr=:4443
-    -tlsCrt=snakeoil.crt
-    -tlsKey=snakeoil.key
-    -log-level=INFO
-  ports:
-    - "2080:2080"
-    - "2443:2443"
-    - "4443:4443"
-  volumes_from:
-    - data
-  working_dir: /ngrok
-  restart: always
+version: '2'
+services:
+  ngrok: 
+    image: packageman:ngrok:latest
+    command: >
+      -httpAddr=:5000
+      -httpsAddr=:5001
+      -tunnelAddr=:4443
+      -log-level=INFO
+    environment:
+      - NGROK_BASE_DOMAIN=foo.bar.com
+    ports:
+      - "2222:2222"
+      - "5000:5000"
+      - "5001:5001"
+      - "4443:4443"
+    working_dir: /ngrok
+    restart: always
