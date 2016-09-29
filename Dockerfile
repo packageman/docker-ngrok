@@ -1,12 +1,8 @@
-#
-# Dockerfile for ngrokd
-#
-
 FROM debian:jessie
-MAINTAINER byron <xiaoqi_2591@outlook.com>
+MAINTAINER Byron Zhang <xiaoqi_2591@outlook.com>
 
 ENV NGROK_GIT https://github.com/inconshreveable/ngrok.git
-ENV NGROK_BASE_DOMAIN foo.bar.com
+ENV NGROK_BASE_DOMAIN tunnel.merrychris.com
 ENV NGROK_DIR /ngrok
 ENV NGROK_TMP /tmp/ngrok
 ENV TMP /tmp
@@ -59,6 +55,6 @@ RUN apt-get update \
     && rm -rf ${NGROK_TMP}
 
 VOLUME $NGROK_DIR
-EXPOSE 80 443 4443
+EXPOSE 5000 5001 4443
 
-ENTRYPOINT /bin/bash -c './ngrokd -domain="${NGROK_BASE_DOMAIN}"'
+CMD /bin/bash -c './ngrokd -domain="${NGROK_BASE_DOMAIN}" -httpAddr=":5000" -httpsAddr=":5001"'

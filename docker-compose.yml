@@ -1,14 +1,7 @@
 version: '2'
 services:
   ngrok: 
-    image: packageman:ngrok:latest
-    command: >
-      -httpAddr=:5000
-      -httpsAddr=:5001
-      -tunnelAddr=:4443
-      -log-level=INFO
-    environment:
-      - NGROK_BASE_DOMAIN=foo.bar.com
+    image: packageman/ngrok:latest
     ports:
       - "2222:2222"
       - "5000:5000"
